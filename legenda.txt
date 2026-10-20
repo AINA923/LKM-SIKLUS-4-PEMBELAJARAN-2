@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#164e42">
+<title>Jelajah Legenda | Aina Wirda, S.Pd</title>
+<style>
+:root{
+  --green:#164e42;--dark:#12392f;--gold:#e3b44f;
+  --cream:#fff9ec;--ink:#253d35;--muted:#61756c;
+  --line:#e3e8dd;--white:#fff;--red:#a33232;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:95px}
+body{
+  margin:0;background:var(--cream);color:var(--ink);
+  font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
+  line-height:1.65;
+}
+button,input,textarea{font:inherit}
+button,a,input,textarea{-webkit-tap-highlight-color:transparent}
+button,a{touch-action:manipulation}
+button{cursor:pointer}
+a{color:var(--green)}
+:focus-visible{outline:3px solid #be7400;outline-offset:4px}
+.wrap{width:min(1080px,calc(100% - 36px));margin:auto}
+.topbar{
+  position:sticky;top:0;z-index:20;background:#fffdf5f5;
+  border-bottom:1px solid var(--line);backdrop-filter:blur(14px);
+}
+.nav{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:16px;min-height:76px;
+}
+.brand{font-weight:850;color:var(--green);text-decoration:none;line-height:1.25}
+.brand small{display:block;font-size:11px;letter-spacing:2px;margin-top:5px}
+.navlinks{display:flex;gap:8px}
+.navlinks a{
+  text-decoration:none;padding:9px 15px;border-radius:30px;
+  font-weight:750;font-size:14px;
+}
+.navlinks a:hover,.navlinks a.active{background:var(--green);color:white}
+.hero{
+  position:relative;overflow:hidden;background:var(--green);
+  color:white;padding:55px 0 0;
+}
+.hero:before{
+  content:"";position:absolute;inset:0;opacity:.065;
+  background:
+    repeating-linear-gradient(45deg,transparent 0 25px,#fff 25px 27px,
+    transparent 27px 52px);
+}
+.hero-grid{position:relative;display:grid;grid-template-columns:1.1fr 1fr;gap:25px;align-items:center}
+.eyebrow{
+  color:var(--gold);text-transform:uppercase;font-size:12px;
+  letter-spacing:2px;font-weight:800;
+}
+h1{font-family:Georgia,serif;font-size:clamp(38px,6vw,68px);line-height:1.08;margin:16px 0}
+h1 em{color:#ffe19a;font-style:normal}
+.hero p{color:#e0ebe2;max-width:520px}
+.teacher{display:inline-block;border:1px solid #ffffff35;border-radius:12px;padding:10px 15px;font-size:14px}
+.actions{display:flex;flex-wrap:wrap;gap:12px;margin:23px 0}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  text-decoration:none;border:0;border-radius:12px;padding:13px 19px;
+  font-weight:800;line-height:1.35;min-height:48px;
+}
+.btn.gold{background:var(--gold);color:#322707}
+.btn.green{background:var(--green);color:white}
+.btn.outline{background:white;border:1px solid var(--green);color:var(--green)}
+.btn:hover{filter:brightness(.96);transform:translateY(-1px)}
+.scene{width:100%;max-height:365px;filter:drop-shadow(0 15px 20px #062c3540)}
+.boat{animation:float 4s ease-in-out infinite;transform-origin:center}
+.cloud{animation:drift 8s ease-in-out infinite alternate}
+.spark{animation:glow 3s ease-in-out infinite alternate}
+@keyframes float{50%{transform:translateY(-7px) rotate(1deg)}}
+@keyframes drift{to{transform:translateX(14px)}}
+@keyframes glow{to{opacity:.3}}
+.pattern{
+  position:relative;margin-top:25px;height:23px;
+  background:linear-gradient(135deg,var(--gold) 25%,transparent 25%) -12px 0/24px 24px,
+             linear-gradient(225deg,var(--gold) 25%,transparent 25%) -12px 0/24px 24px;
+}
+section.content{padding:45px 0 5px}
+.sectionhead{display:flex;align-items:end;justify-content:space-between;gap:15px;margin-bottom:20px}
+h2{font-family:Georgia,serif;font-size:32px;line-height:1.2;margin:7px 0}
+h3{line-height:1.4;margin:0 0 10px}
+.muted{color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card,.panel{
+  background:white;border:1px solid var(--line);border-radius:20px;
+  padding:24px;box-shadow:0 7px 24px #204f3510;
+}
+.card .icon{
+  display:grid;place-items:center;width:45px;height:45px;
+  border-radius:13px;background:#f8edcf;margin-bottom:14px;font-size:23px;
+}
+.card p{font-size:14px;margin-bottom:0}
+.goals{margin:20px 0;padding:20px 24px;border-left:4px solid var(--gold);background:#f3eddc;border-radius:0 15px 15px 0}
+.goals ul{padding-left:20px;margin:8px 0}
+details{background:white;border:1px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0}
+summary{cursor:pointer;font-weight:800;color:var(--green)}
+details p{margin-bottom:2px}
+.readbox{
+  background:var(--green);color:white;display:flex;
+  justify-content:space-between;gap:24px;align-items:center;
+  padding:27px;border-radius:20px;margin-top:22px;
+}
+.readbox p{margin:6px 0 0;color:#e4ede7}
+.readbox .btn{flex-shrink:0}
+.notice{
+  padding:14px 17px;background:#fff3d3;border:1px solid #eed594;
+  border-radius:12px;font-size:14px;margin:18px 0;
+}
+.identity{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.field label{display:block;font-weight:750;margin-bottom:6px}
+input,textarea{
+  display:block;width:100%;border:1px solid #b9cabe;
+  background:#fcfdf9;color:var(--ink);border-radius:10px;padding:12px;
+}
+textarea{min-height:115px;resize:vertical}
+input:focus,textarea:focus{border-color:var(--green);background:white}
+input[aria-invalid="true"],textarea[aria-invalid="true"]{border-color:var(--red)}
+.help{font-size:13px;color:var(--muted);margin:5px 0 0}
+.task{margin-top:18px}
+.tasktitle{display:flex;gap:13px;align-items:flex-start}
+.number{
+  display:grid;place-items:center;flex-shrink:0;width:36px;height:36px;
+  color:var(--green);background:#f5e7bf;border-radius:50%;font-weight:900;
+}
+.task p{margin:6px 0 17px}
+.subfields{display:grid;gap:16px}
+.progressline{display:flex;justify-content:space-between;gap:10px;font-size:13px;font-weight:750;margin-bottom:8px}
+progress{width:100%;height:12px;accent-color:var(--green)}
+.sticky-progress{margin:22px 0}
+.result{margin-top:20px}
+.status{min-height:25px;font-weight:700;font-size:14px}
+.error{color:var(--red)}
+#preview{white-space:pre-wrap;font-size:14px;background:#f6f8f2;border-radius:12px;padding:18px;max-height:420px;overflow:auto}
+footer{text-align:center;padding:35px 15px;color:var(--muted);font-size:13px}
+[hidden]{display:none!important}
+@media(max-width:700px){
+  .hero{padding-top:32px}
+  .hero-grid{grid-template-columns:1fr;gap:0}
+  .scene{max-height:240px;margin-top:5px}
+  .cards,.identity{grid-template-columns:1fr}
+  .readbox{display:block}
+  .readbox .btn{margin-top:18px;width:100%}
+  .panel,.card{padding:20px}
+  .sectionhead{display:block}
+  .navlinks a{padding:8px 12px}
+  .brand{font-size:14px}
+  .brand small{font-size:9px}
+  .actions .btn{flex:1 1 180px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*:before,*:after{animation:none!important;scroll-behavior:auto!important}
+}
+@media print{
+  .topbar,.hero,.actions,.readbox,footer,#materi,.sticky-progress,.notice{display:none!important}
+  body{background:white}.panel{box-shadow:none;break-inside:avoid}
+  textarea{border:0;min-height:100px}
+}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <nav class="wrap nav" aria-label="Navigasi utama">
+    <a class="brand" href="#beranda">Jelajah Legenda
+      <small>BAHASA INDONESIA</small>
+    </a>
+    <div class="navlinks">
+      <a href="#materi">Materi</a>
+      <a href="#lkm">LKM</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+<section class="hero" id="beranda" aria-labelledby="judul">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Selamat datang, penjelajah cerita!</span>
+      <h1 id="judul">Dengar ceritanya.<br><em>Temukan maknanya.</em></h1>
+      <p>Jelajahi dunia legenda, susun pertanyaanmu, dan temukan
+      ide pokok cerita bersama.</p>
+      <div class="teacher">Guru Praktik: <strong>Aina Wirda, S.Pd</strong></div>
+      <div class="actions">
+        <a class="btn gold" href="#materi">Mulai belajar ?</a>
+      </div>
+    </div>
+
+    <!-- Ilustrasi vektor mandiri, terinspirasi rumah panggung dan Sungai Batanghari. -->
+    <svg class="scene" viewBox="0 0 520 360" role="img"
+      aria-label="Ilustrasi rumah panggung bernuansa Melayu Jambi di tepi sungai">
+      <circle cx="392" cy="84" r="48" fill="#f5cf76"/>
+      <g class="cloud" fill="#fff" opacity=".5">
+        <path d="M57 74q12-27 35-10q22-19 35 9z"/>
+        <path d="M275 43q13-23 30-8q22-11 31 10z"/>
+      </g>
+      <g fill="#729e76">
+        <path d="M0 222Q75 122 144 214Q227 153 303 211Q399 122 520 212V300H0Z"/>
+      </g>
+      <g fill="#265d49">
+        <path d="M27 231V114h9v117z"/>
+        <path d="M31 124Q-10 105 12 84Q33 85 31 124M32 123Q77 99 64 81Q40 79 32 123"/>
+        <path d="M475 236V129h8v107z"/>
+        <path d="M478 138Q433 113 453 94Q476 99 478 138M479 137Q518 112 507 92Q486 97 479 137"/>
+      </g>
+      <g>
+        <path d="M138 153H350V252H138Z" fill="#dfb36d"/>
+        <path d="M147 247h12v45h-12m177-45h12v45h-12" fill="#825438"/>
+        <path d="M109 157L244 66L380 157Z" fill="#9b4534"/>
+        <path d="M109 157L244 66L380 157" fill="none" stroke="#f1cd78" stroke-width="9" stroke-linejoin="round"/>
+        <path d="M129 150H359V165H129Z" fill="#efce88"/>
+        <path d="M220 193h48v65h-48z" fill="#79553c"/>
+        <path d="M157 183h39v38h-39zm134 0h39v38h-39z" fill="#164e42"/>
+        <path d="M176 183v38m134-38v38" stroke="#f2d99d" stroke-width="4"/>
+        <path d="M216 258h58v10h-58zm-7 12h72v10h-72zm-7 12h86v10h-86z" fill="#b6814d"/>
+        <path d="M147 172h194" stroke="#a36c39" stroke-width="3" stroke-dasharray="6 7"/>
+      </g>
+      <path d="M0 290Q100 267 211 293T520 285V360H0Z" fill="#609f99"/>
+      <g stroke="#d2e6c7" stroke-width="3" opacity=".6" fill="none">
+        <path d="M20 317h87m52 20h72m125-25h98m-146 35h94"/>
+      </g>
+      <g class="boat">
+        <path d="M315 305h137q-18 31-99 19z" fill="#613c2b"/>
+        <path d="M321 305h125" stroke="#f0cd77" stroke-width="5"/>
+        <circle cx="373" cy="271" r="12" fill="#edbd93"/>
+        <path d="M359 304v-21q15-13 29 0v21z" fill="#c95a44"/>
+        <path d="M361 262l11-10 15 12z" fill="#e6be54"/>
+        <path d="M389 281l31 48" stroke="#edca85" stroke-width="5" stroke-linecap="round"/>
+      </g>
+      <g class="spark" fill="#ffe6a0">
+        <circle cx="101" cy="197" r="3"/><circle cx="411" cy="205" r="3"/>
+        <circle cx="80" cy="253" r="2"/>
+      </g>
+    </svg>
+  </div>
+  <div class="pattern" aria-hidden="true"></div>
+</section>
+
+<section class="content wrap" id="materi" aria-labelledby="materi-title">
+  <div class="sectionhead">
+    <div><span class="eyebrow" style="color:#8b651b">Bekal penjelajah</span>
+      <h2 id="materi-title">Mari mengenal legenda</h2>
+    </div>
+    <span class="muted">Simak • Bertanya • Pahami</span>
+  </div>
+
+  <div class="goals">
+    <strong>Tujuan pembelajaran</strong>
+    <ul>
+      <li>Murid dapat membuat pertanyaan tentang cerita yang dibacakan.</li>
+      <li>Murid dapat memahami isi dan menemukan ide pokok cerita
+      melalui pertanyaan pemahaman bacaan.</li>
+    </ul>
+  </div>
+
+  <div class="cards">
+    <article class="card">
+      <div class="icon" aria-hidden="true">??</div>
+      <h3>Apa itu legenda?</h3>
+      <p>Legenda adalah cerita rakyat yang diwariskan turun-temurun.
+      Ceritanya sering berkaitan dengan asal-usul tempat, tokoh,
+      atau peristiwa yang dipercaya masyarakat.</p>
+    </article>
+    <article class="card">
+      <div class="icon" aria-hidden="true">??</div>
+      <h3>Pertanyaan yang baik</h3>
+      <p>Gunakan kata tanya <strong>apa, siapa, di mana, kapan,
+      mengapa,</strong> dan <strong>bagaimana</strong>.
+      Pertanyaan harus jelas dan berkaitan dengan cerita.</p>
+    </article>
+    <article class="card">
+      <div class="icon" aria-hidden="true">??</div>
+      <h3>Menemukan ide pokok</h3>
+      <p>Ide pokok adalah gagasan utama. Tanyakan:
+      “Bagian ini terutama membahas apa?” Tuliskan inti pembahasan
+      dalam satu kalimat, lalu dukung dengan detail cerita.</p>
+    </article>
+  </div>
+
+  <details>
+    <summary>Contoh membuat pertanyaan</summary>
+    <p>Contoh situasi: seorang tokoh menolong warga menyeberangi sungai.</p>
+    <p><strong>Pertanyaan:</strong> Mengapa tokoh itu menolong warga?<br>
+    <strong>Cara menjawab:</strong> Jelaskan alasannya berdasarkan
+    cerita yang kamu dengarkan.</p>
+  </details>
+  <details>
+    <summary>Bedakan ide pokok dan pesan moral</summary>
+    <p><strong>Ide pokok:</strong> hal utama yang dibahas dalam cerita
+    atau bagian cerita.<br>
+    <strong>Pesan moral:</strong> pelajaran baik yang dapat kita ambil.
+    Keduanya bisa berkaitan, tetapi memiliki fungsi berbeda.</p>
+  </details>
+
+  <div class="readbox">
+    <div>
+      <h3>Pilih satu cerita, lalu simak bersama</h3>
+      <p>Buka folder cerita. Pilih satu judul, lalu dengarkan guru
+      atau teman membacakannya. Catat peristiwa pentingnya.</p>
+    </div>
+    <a class="btn gold"
+       href="https://drive.google.com/drive/folders/1BaqwvMhfHbVgLhQVFyO6Krw2CIL67l_Y?usp=sharing"
+       target="_blank" rel="noopener noreferrer">Buka folder cerita ?</a>
+  </div>
+  <p class="help">Folder terbuka di tab baru. Jika akses ditolak,
+  mintalah guru memberikan izin akses folder.</p>
+</section>
+
+<section class="content wrap" id="lkm" aria-labelledby="lkm-title">
+  <div class="sectionhead">
+    <div><span class="eyebrow" style="color:#8b651b">Saatnya mencoba</span>
+      <h2 id="lkm-title">Lembar Kerja Murid</h2>
+    </div>
+    <span class="muted">Cukup 5 tugas</span>
+  </div>
+  <p>Kerjakan berdasarkan <strong>satu cerita yang dipilih</strong>.
+  Gunakan kalimatmu sendiri dan periksa kembali jawabanmu.</p>
+
+  <form id="worksheet">
+    <div class="panel identity">
+      <div class="field">
+        <label for="nama">Nama murid</label>
+        <input id="nama" name="nama" required maxlength="100"
+          autocomplete="name" placeholder="Tulis nama lengkap">
+      </div>
+      <div class="field">
+        <label for="kelas">Kelas</label>
+        <input id="kelas" name="kelas" required maxlength="40"
+          placeholder="Contoh: IV A">
+      </div>
+      <div class="field">
+        <label for="tanggal">Tanggal</label>
+        <input id="tanggal" name="tanggal" type="date" required>
+      </div>
+      <div class="field">
+        <label for="judulcerita">Judul cerita pilihan</label>
+        <input id="judulcerita" name="judulcerita" required maxlength="150"
+          placeholder="Sesuai cerita yang kamu pilih">
+      </div>
+    </div>
+
+    <div class="sticky-progress">
+      <div class="progressline">
+        <span>Perjalanan belajarmu</span>
+        <span id="progressText">0 dari 5 tugas terisi</span>
+      </div>
+      <progress id="progress" value="0" max="5"
+        aria-label="Jumlah tugas yang telah terisi"></progress>
+      <p class="help" id="saveStatus" role="status">
+        Draf disimpan di peramban ini jika penyimpanan tersedia.
+      </p>
+    </div>
+
+    <article class="panel task">
+      <div class="tasktitle"><span class="number">1</span>
+        <div><h3>Kenali isi cerita</h3>
+        <p>Sebutkan tokoh utama, tempat kejadian, dan peristiwa
+        terpenting yang kamu dengarkan.</p></div>
+      </div>
+      <div class="field">
+        <label for="t1">Jawaban tugas 1</label>
+        <textarea id="t1" name="t1" required maxlength="5000"
+          placeholder="Tokoh utama: ...&#10;Tempat kejadian: ...&#10;Peristiwa terpenting: ..."></textarea>
+      </div>
+    </article>
+
+    <article class="panel task">
+      <div class="tasktitle"><span class="number">2</span>
+        <div><h3>Buat pertanyaanmu</h3>
+        <p>Buat dua pertanyaan tentang cerita. Gunakan kata tanya
+        yang berbeda dan akhiri dengan tanda tanya.</p></div>
+      </div>
+      <div class="subfields">
+        <div class="field">
+          <label for="t2a">Pertanyaan pertama</label>
+          <textarea id="t2a" name="t2a" required maxlength="2000"
+            placeholder="Siapa / Apa / Di mana / Kapan ...?"></textarea>
+        </div>
+        <div class="field">
+          <label for="t2b">Pertanyaan kedua</label>
+          <textarea id="t2b" name="t2b" required maxlength="2000"
+            placeholder="Mengapa / Bagaimana ...?"></textarea>
+        </div>
+      </div>
+    </article>
+
+    <article class="panel task">
+      <div class="tasktitle"><span class="number">3</span>
+        <div><h3>Jawab berdasarkan cerita</h3>
+        <p>Jawab dua pertanyaan yang kamu buat pada tugas 2.
+        Sertakan kejadian atau informasi cerita yang mendukung jawabanmu.</p></div>
+      </div>
+      <div class="field">
+        <label for="t3">Jawaban dan bukti cerita</label>
+        <textarea id="t3" name="t3" required maxlength="5000"
+          placeholder="Jawaban pertanyaan pertama dan buktinya: ...&#10;&#10;Jawaban pertanyaan kedua dan buktinya: ..."></textarea>
+      </div>
+    </article>
+
+    <article class="panel task">
+      <div class="tasktitle"><span class="number">4</span>
+        <div><h3>Pahami masalah dan penyelesaiannya</h3>
+        <p>Apa masalah yang dihadapi tokoh utama?
+        Bagaimana masalah itu diselesaikan atau bagaimana akhir ceritanya?</p></div>
+      </div>
+      <div class="field">
+        <label for="t4">Masalah dan penyelesaian</label>
+        <textarea id="t4" name="t4" required maxlength="5000"
+          placeholder="Masalah tokoh utama: ...&#10;Penyelesaian atau akhir cerita: ..."></textarea>
+      </div>
+    </article>
+
+    <article class="panel task">
+      <div class="tasktitle"><span class="number">5</span>
+        <div><h3>Temukan ide pokok</h3>
+        <p>Pilih satu bagian cerita. Tuliskan ide pokoknya dalam
+        satu kalimat dan dua detail yang mendukungnya.</p></div>
+      </div>
+      <div class="field">
+        <label for="t5">Ide pokok dan detail pendukung</label>
+        <textarea id="t5" name="t5" required maxlength="5000"
+          placeholder="Bagian cerita yang dipilih: ...&#10;Ide pokok: ...&#10;Detail pendukung 1: ...&#10;Detail pendukung 2: ..."></textarea>
+      </div>
+    </article>
+
+    <div class="panel result">
+      <h3>Periksa, unduh, lalu kirim</h3>
+      <p>Pastikan identitas dan lima tugas sudah terisi.
+      Jawaban tidak dinilai otomatis; guru akan membacanya.</p>
+      <div class="actions">
+        <button class="btn outline" type="button" id="review">Periksa jawaban</button>
+        <button class="btn green" type="submit">Unduh Word (.docx)</button>
+        <button class="btn gold" type="button" id="wa">Buka WhatsApp Guru ?</button>
+      </div>
+      <div class="notice">
+        <strong>Cara mengumpulkan:</strong>
+        unduh Word ? buka WhatsApp Guru ? pilih
+        <strong>Lampiran / Dokumen</strong> ? pilih file LKM yang baru
+        diunduh ? tekan <strong>Kirim</strong>.<br>
+        Nomor guru: <strong>085378888069</strong>.
+        Halaman ini tidak dapat memastikan pesan sudah terkirim.
+      </div>
+      <p id="status" class="status" role="status" aria-live="polite"></p>
+      <details id="reviewBox" hidden>
+        <summary>Pratinjau jawabanmu</summary>
+        <div id="preview"></div>
+      </details>
+      <button class="btn outline" type="button" id="clear">Hapus draf</button>
+      <p class="help">Gunakan “Hapus draf” setelah selesai jika memakai
+      perangkat bersama.</p>
+    </div>
+  </form>
+</section>
+</main>
+<footer>
+  Jelajah Legenda · Bahasa Indonesia<br>
+  Guru Praktik: Aina Wirda, S.Pd<br>
+  Ilustrasi terinspirasi suasana Melayu Jambi.
+</footer>
+
+<script>
+"use strict";
+const form = document.getElementById("worksheet");
+const statusEl = document.getElementById("status");
+const storageKey = "jelajah-legenda-lkm-v1";
+const fields = [...form.querySelectorAll("input,textarea")];
+const taskGroups = [
+  ["t1"], ["t2a","t2b"], ["t3"], ["t4"], ["t5"]
+];
+const $ = id => document.getElementById(id);
+let lastDownloaded = "";
+
+const questions = [
+  ["Tugas 1 — Kenali isi cerita",
+   "Sebutkan tokoh utama, tempat kejadian, dan peristiwa terpenting.",
+   ["t1"]],
+  ["Tugas 2 — Buat pertanyaanmu",
+   "Buat dua pertanyaan dengan kata tanya yang berbeda.",
+   ["t2a","t2b"]],
+  ["Tugas 3 — Jawab berdasarkan cerita",
+   "Jawab kedua pertanyaan dan sertakan bukti dari cerita.",
+   ["t3"]],
+  ["Tugas 4 — Masalah dan penyelesaian",
+   "Jelaskan masalah tokoh utama dan penyelesaian atau akhir ceritanya.",
+   ["t4"]],
+  ["Tugas 5 — Temukan ide pokok",
+   "Pilih satu bagian cerita. Tuliskan ide pokok dan dua detail pendukung.",
+   ["t5"]]
+];
+
+function say(message, error=false) {
+  statusEl.textContent = message;
+  statusEl.classList.toggle("error", error);
+}
+function data() {
+  return Object.fromEntries(fields.map(el => [el.id, el.value.trim()]));
+}
+function localToday() {
+  const d = new Date();
+  return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+
+    "-"+String(d.getDate()).padStart(2,"0");
+}
+function progress() {
+  const count = taskGroups.filter(group =>
+    group.every(id => $(id).value.trim())
+  ).length;
+  $("progress").value = count;
+  $("progressText").textContent = count+" dari 5 tugas terisi";
+}
+function save() {
+  try {
+    localStorage.setItem(storageKey, JSON.stringify(data()));
+    $("saveStatus").textContent = "Draf tersimpan di peramban ini.";
+  } catch {
+    $("saveStatus").textContent =
+      "Penyimpanan draf tidak tersedia. Unduh Word sebelum menutup halaman.";
+  }
+}
+function valid() {
+  fields.forEach(el => {
+    el.setCustomValidity("");
+    if (!el.value.trim()) el.setCustomValidity("Isian ini perlu dilengkapi.");
+    el.setAttribute("aria-invalid", String(!el.validity.valid));
+  });
+  if (!form.reportValidity()) {
+    say("Lengkapi identitas dan semua jawaban terlebih dahulu.", true);
+    return false;
+  }
+  return true;
+}
+function reviewText(d) {
+  const out = [
+    "LEMBAR KERJA MURID — CERITA LEGENDA",
+    "Guru Praktik: Aina Wirda, S.Pd",
+    "",
+    "Nama: "+d.nama,
+    "Kelas: "+d.kelas,
+    "Tanggal: "+d.tanggal,
+    "Judul cerita: "+d.judulcerita
+  ];
+  questions.forEach(([title,instruction,ids]) => {
+    out.push("",title,instruction);
+    ids.forEach((id,i) => {
+      out.push((ids.length>1 ? "Pertanyaan "+(i+1)+": " : "")+d[id]);
+    });
+  });
+  return out.join("\n");
+}
+
+try {
+  const draft = JSON.parse(localStorage.getItem(storageKey) || "{}");
+  if (draft && typeof draft === "object") {
+    fields.forEach(el => {
+      if (typeof draft[el.id] === "string") el.value = draft[el.id];
+    });
+  }
+} catch {
+  $("saveStatus").textContent = "Draf sebelumnya tidak dapat dimuat.";
+}
+if (!$("tanggal").value) $("tanggal").value = localToday();
+progress();
+
+form.addEventListener("input", event => {
+  if (event.target.matches("input,textarea")) {
+    event.target.setCustomValidity("");
+    event.target.removeAttribute("aria-invalid");
+    lastDownloaded = "";
+    $("reviewBox").hidden = true;
+    progress();
+    save();
+  }
+});
+
+$("review").addEventListener("click", () => {
+  if (!valid()) return;
+  $("preview").textContent = reviewText(data());
+  $("reviewBox").hidden = false;
+  $("reviewBox").open = true;
+  say("Jawaban lengkap. Baca kembali sebelum mengunduh.");
+});
+
+/*
+  DOCX mandiri tanpa pustaka eksternal.
+  DOCX adalah paket ZIP berisi XML. ZIP di bawah memakai metode STORE
+  (tanpa kompresi), dengan CRC32 dan nama berkas ASCII.
+*/
+const encoder = new TextEncoder();
+
+function xml(text) {
+  return String(text).replace(/[<>&"']/g, char => ({
+    "<":"&lt;",">":"&gt;","&":"&amp;",'"':"&quot;","'":"&apos;"
+  }[char])).replace(
+    /[\u0000-\u0008\u000B\u000C\u000E-\u001F]/g, ""
+  );
+}
+function paragraph(text, bold=false) {
+  return '<w:p><w:pPr><w:spacing w:after="140"/></w:pPr><w:r>'+
+    (bold ? '<w:rPr><w:b/></w:rPr>' : '')+
+    '<w:t xml:space="preserve">'+xml(text)+'</w:t></w:r></w:p>';
+}
+function answerParagraphs(text) {
+  return text.split(/\r?\n/).map(line => paragraph(line || " ")).join("");
+}
+const crcTable = new Uint32Array(256);
+for (let n=0;n<256;n++) {
+  let c=n;
+  for (let k=0;k<8;k++) c=(c&1) ? 0xedb88320^(c>>>1) : c>>>1;
+  crcTable[n]=c>>>0;
+}
+function crc32(bytes) {
+  let crc=0xffffffff;
+  for (const byte of bytes) crc=crcTable[(crc^byte)&255]^(crc>>>8);
+  return (crc^0xffffffff)>>>0;
+}
+function zip(entries) {
+  const localParts=[], centralParts=[];
+  let offset=0, centralSize=0;
+
+  for (const [path,content] of entries) {
+    const name=encoder.encode(path), bytes=encoder.encode(content);
+    const crc=crc32(bytes);
+    const local=new Uint8Array(30+name.length);
+    const lv=new DataView(local.buffer);
+    lv.setUint32(0,0x04034b50,true);
+    lv.setUint16(4,20,true);
+    lv.setUint16(6,0,true);
+    lv.setUint16(8,0,true);
+    lv.setUint16(12,33,true);
+    lv.setUint32(14,crc,true);
+    lv.setUint32(18,bytes.length,true);
+    lv.setUint32(22,bytes.length,true);
+    lv.setUint16(26,name.length,true);
+    local.set(name,30);
+
+    const central=new Uint8Array(46+name.length);
+    const cv=new DataView(central.buffer);
+    cv.setUint32(0,0x02014b50,true);
+    cv.setUint16(4,20,true);
+    cv.setUint16(6,20,true);
+    cv.setUint16(14,33,true);
+    cv.setUint32(16,crc,true);
+    cv.setUint32(20,bytes.length,true);
+    cv.setUint32(24,bytes.length,true);
+    cv.setUint16(28,name.length,true);
+    cv.setUint32(42,offset,true);
+    central.set(name,46);
+
+    localParts.push(local,bytes);
+    centralParts.push(central);
+    offset+=local.length+bytes.length;
+    centralSize+=central.length;
+  }
+  const end=new Uint8Array(22);
+  const ev=new DataView(end.buffer);
+  ev.setUint32(0,0x06054b50,true);
+  ev.setUint16(8,entries.length,true);
+  ev.setUint16(10,entries.length,true);
+  ev.setUint32(12,centralSize,true);
+  ev.setUint32(16,offset,true);
+
+  return new Blob([...localParts,...centralParts,end], {
+    type:"application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+  });
+}
+function makeDocx(d) {
+  let body=paragraph("LEMBAR KERJA MURID",true)+
+    paragraph("Bahasa Indonesia — Cerita Legenda",true)+
+    paragraph("Guru Praktik: Aina Wirda, S.Pd")+
+    paragraph("Nama: "+d.nama)+paragraph("Kelas: "+d.kelas)+
+    paragraph("Tanggal: "+d.tanggal)+
+    paragraph("Judul cerita: "+d.judulcerita);
+
+  questions.forEach(([title,instruction,ids]) => {
+    body+=paragraph(title,true)+paragraph(instruction);
+    ids.forEach((id,i) => {
+      if (ids.length>1) body+=paragraph("Pertanyaan "+(i+1)+":",true);
+      body+=answerParagraphs(d[id]);
+    });
+  });
+
+  const declaration='<?xml version="1.0" encoding="UTF-8" standalone="yes"?>';
+  const documentXml=declaration+
+    '<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">'+
+    '<w:body>'+body+
+    '<w:sectPr><w:pgSz w:w="11906" w:h="16838"/>'+
+    '<w:pgMar w:top="1134" w:right="1134" w:bottom="1134" w:left="1134"/>'+
+    '</w:sectPr></w:body></w:document>';
+
+  const types=declaration+
+    '<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">'+
+    '<Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>'+
+    '<Default Extension="xml" ContentType="application/xml"/>'+
+    '<Override PartName="/word/document.xml" '+
+    'ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/>'+
+    '</Types>';
+
+  const rels=declaration+
+    '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'+
+    '<Relationship Id="rId1" '+
+    'Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" '+
+    'Target="word/document.xml"/></Relationships>';
+
+  return zip([
+    ["[Content_Types].xml",types],
+    ["_rels/.rels",rels],
+    ["word/document.xml",documentXml]
+  ]);
+}
+function filename(d) {
+  const clean = value => value.replace(/[^a-zA-Z0-9_-]/g,"_").slice(0,60);
+  return "LKM_Legenda_"+clean(d.nama)+"_"+clean(d.kelas)+".docx";
+}
+
+form.addEventListener("submit", event => {
+  event.preventDefault();
+  if (!valid()) return;
+  try {
+    const d=data(), blob=makeDocx(d), name=filename(d);
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement("a");
+    a.href=url;
+    a.download=name;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(url),60000);
+    lastDownloaded=name;
+    say("Unduhan dimulai: "+name+
+      ". Setelah file tersimpan, buka WhatsApp Guru dan lampirkan dokumennya.");
+  } catch {
+    say("Dokumen belum dapat dibuat. Coba gunakan peramban lain.",true);
+  }
+});
+
+$("wa").addEventListener("click", () => {
+  if (!valid()) return;
+  if (!lastDownloaded) {
+    say("Unduh file Word terlebih dahulu, lalu buka WhatsApp Guru.",true);
+    return;
+  }
+  const d=data();
+  const message=
+    "Assalamu’alaikum, Bu Aina.\n"+
+    "Saya "+d.nama+", kelas "+d.kelas+".\n"+
+    "Saya ingin mengumpulkan LKM Bahasa Indonesia.\n"+
+    "Judul cerita: "+d.judulcerita+"\n"+
+    "Nama file: "+lastDownloaded+"\n"+
+    "Saya akan melampirkan dokumen Word pada pesan ini. Terima kasih.";
+  const a=document.createElement("a");
+  a.href="https://wa.me/6285378888069?text="+encodeURIComponent(message);
+  a.target="_blank";
+  a.rel="noopener noreferrer";
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  say("Chat guru dibuka. Lampirkan file Word dan tekan Kirim di WhatsApp.");
+});
+
+$("clear").addEventListener("click", () => {
+  if (!confirm("Hapus seluruh identitas dan jawaban pada perangkat ini?")) return;
+  form.reset();
+  fields.forEach(el => {
+    el.value="";
+    el.setCustomValidity("");
+    el.removeAttribute("aria-invalid");
+  });
+  $("tanggal").value=localToday();
+  try { localStorage.removeItem(storageKey); } catch {}
+  lastDownloaded="";
+  $("reviewBox").hidden=true;
+  $("preview").textContent="";
+  progress();
+  $("saveStatus").textContent="Draf telah dihapus.";
+  say("Silakan mulai lembar kerja baru.");
+});
+
+if ("IntersectionObserver" in window) {
+  const links=[...document.querySelectorAll(".navlinks a")];
+  const observer=new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        links.forEach(link => {
+          const active=link.hash==="#"+entry.target.id;
+          link.classList.toggle("active",active);
+          if (active) link.setAttribute("aria-current","location");
+          else link.removeAttribute("aria-current");
+        });
+      }
+    });
+  },{rootMargin:"-10% 0px -65% 0px"});
+  observer.observe($("materi"));
+  observer.observe($("lkm"));
+}
+</script>
+</body>
+</html>
